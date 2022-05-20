@@ -44,9 +44,9 @@ class Login extends React.Component {
   }
 
   changeToWalletPage = () => {
-    const { history, saveUser } = this.props;
+    const { history, dispatch } = this.props;
     const { email } = this.state;
-    saveUser(email);
+    dispatch(setUserEmail(email));
     history.push('/carteira');
   };
 
@@ -96,11 +96,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  saveUser: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  saveUser: (userEmail) => dispatch(setUserEmail(userEmail)),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
+export default connect()(Login);
