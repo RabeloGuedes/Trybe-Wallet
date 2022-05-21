@@ -1,7 +1,7 @@
 import {
   FETCH_CURRENCIES,
   ADD_EXPENSES,
-  UPDATE_EXPENSES,
+  REMOVE_EXPENSES,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -12,21 +12,21 @@ const INITIAL_STATE = {
 
 const wallet = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
+  case ADD_EXPENSES:
+    return {
+      ...state,
+      expenses: [...state.expenses, payload],
+    };
   case FETCH_CURRENCIES:
     return {
       ...state,
       currencies: payload.data,
       rates: payload.rates,
     };
-  case ADD_EXPENSES:
+  case REMOVE_EXPENSES:
     return {
       ...state,
-      expenses: [...state.expenses, payload],
-    };
-  case UPDATE_EXPENSES:
-    return {
-      ...state,
-      totalExpenses: payload,
+      expenses: payload,
     };
   default: return state;
   }

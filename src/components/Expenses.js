@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addExpenses, updateExpenses, requestingCurrenciesRates } from '../actions/index';
+import {
+  addExpenses,
+  requestingCurrenciesRates,
+} from '../actions/index';
 
 const defaultTag = 'Alimentação';
 const defaultMethod = 'Dinheiro';
@@ -38,17 +41,6 @@ class Expenses extends Component {
       method: defaultMethod,
       tag: defaultTag,
     });
-    this.updatingExpenses();
-  }
-
-  updatingExpenses() {
-    const { expenses, dispatch } = this.props;
-    let updatedExpenses = 0;
-    expenses.forEach(({ value, currency, exchangeRates }) => {
-      const conversionRate = exchangeRates[currency].ask;
-      updatedExpenses += Number(value) * conversionRate;
-    });
-    dispatch(updateExpenses(Math.floor(updatedExpenses * 100) / 100));
   }
 
   capturingInput({ target: { value, name } }) {

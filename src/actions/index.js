@@ -1,15 +1,10 @@
-export const SET_EMAIL = 'SET_EMAIL';
+export const ADD_EXPENSES = 'ADD_EXPENSES';
 
 export const FETCH_CURRENCIES = 'FETCH_CURRENCIES';
 
-export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const REMOVE_EXPENSES = 'REMOVE_EXPENSES';
 
-export const UPDATE_EXPENSES = 'UPDATE_EXPENSES';
-
-export const updateExpenses = (newExpenses) => ({
-  type: UPDATE_EXPENSES,
-  payload: newExpenses,
-});
+export const SET_EMAIL = 'SET_EMAIL';
 
 export const addExpenses = (expenses) => ({
   type: ADD_EXPENSES,
@@ -22,6 +17,11 @@ export const fetchCurrencies = (data, rates) => ({
     data,
     rates,
   },
+});
+
+export const removeExpenses = (newExpensesList) => ({
+  type: REMOVE_EXPENSES,
+  payload: newExpensesList,
 });
 
 export const setUserEmail = (userEmail) => ({
