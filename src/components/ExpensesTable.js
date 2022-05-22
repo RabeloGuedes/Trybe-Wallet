@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removeExpenses } from '../actions/index';
+import { removeExpenses, editModeOn } from '../actions/index';
 
 export class ExpensesTable extends Component {
   async deleteExpense({ target: { id } }) {
@@ -17,7 +17,7 @@ export class ExpensesTable extends Component {
   }
 
   render() {
-    const { expenses } = this.props;
+    const { expenses, dispatch } = this.props;
     return (
       <div>
         <table>
@@ -85,10 +85,13 @@ export class ExpensesTable extends Component {
                         { exchangeRates[currency].name }
                       </td>
                       <td>
-                        { Math.round(exchangeRates[currency].ask * 100) / 100 }
+                        { (Math
+                          .round(exchangeRates[currency].ask * 100) / 100).toFixed(2) }
                       </td>
                       <td>
-                        { Math.ceil(value * exchangeRates[currency].ask * 100) / 100 }
+                        { (Math
+                          .ceil(value * exchangeRates[currency]
+                            .ask * 100) / 100).toFixed(2) }
                       </td>
                       <td>
                         Real
@@ -96,6 +99,8 @@ export class ExpensesTable extends Component {
                       <td>
                         <button
                           type="button"
+                          data-testid="edit-btn"
+                          onClick={ () => editModeOn(dispatch, id) }
                         >
                           Editar
                         </button>
